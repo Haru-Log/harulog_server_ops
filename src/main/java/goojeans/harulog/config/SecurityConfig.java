@@ -100,7 +100,12 @@ public class SecurityConfig {
                 "https://kb38e49779611a.user-app.krampoline.com:5672",
                 "https://kb38e49779611a.user-app.krampoline.com:15672",
                 "https://kb38e49779611a.user-app.krampoline.com:61613",
-                "https://kb38e49779611a.user-app.krampoline.com:8080"
+                "https://kb38e49779611a.user-app.krampoline.com:8080",
+                "http://rabbitmq.default.svc.cluster.local:61613",
+                "http://rabbitmq.default.svc.cluster.local:5672",
+                "http://rabbitmq.default.svc.cluster.local:15672",
+                "http://frontend.default.svc.cluster.local:3000",
+                "http://rabbitmq.default.svc.cluster.local:8080"
         ));
         corsConfiguration.setAllowCredentials(true);
 
