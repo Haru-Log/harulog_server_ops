@@ -17,6 +17,11 @@ public class FirstController {
         return "hello";
     }
 
+    @RequestMapping("/api")
+    public String readiness() {
+        return "hello";
+    }
+
     @GetMapping("/api/swagger-test")
     @Operation(
             summary = "Swagger 테스트 API",
