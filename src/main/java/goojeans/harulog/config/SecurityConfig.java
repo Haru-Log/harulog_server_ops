@@ -97,6 +97,7 @@ public class SecurityConfig {
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         corsConfiguration.setAllowedOrigins(List.of(
                 "https://kb38e49779611a.user-app.krampoline.com:3000",
+                "https://kb38e49779611a.user-app.krampoline.com:3000/",
                 "https://kb38e49779611a.user-app.krampoline.com:5672",
                 "https://kb38e49779611a.user-app.krampoline.com:15672",
                 "https://kb38e49779611a.user-app.krampoline.com:61613",
