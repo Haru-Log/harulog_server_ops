@@ -10,4 +10,4 @@ RUN echo "systemProp.http.proxyHost=krmp-proxy.9rum.cc\nsystemProp.http.proxyPor
 
 RUN ./gradlew clean build -x test
 
-CMD ["java", "-jar", "-Dspring.profiles.active=dev", "-Dhttp.proxyHost=krmp-proxy.9rum.cc", "-Dhttp.proxyPort=3128", "-Dhttps.proxyHost=krmp-proxy.9rum.cc", "-Dhttps.proxyPort=3128", "/home/gradle/project/build/libs/harulog-1.0.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=test", "-Dhttp.proxyHost=krmp-proxy.9rum.cc", "-Dhttp.proxyPort=3128", "-Dhttps.proxyHost=krmp-proxy.9rum.cc", "-Dhttps.proxyPort=3128", "/home/gradle/project/build/libs/harulog-1.0.jar"]
