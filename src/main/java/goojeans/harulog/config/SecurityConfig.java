@@ -63,8 +63,8 @@ public class SecurityConfig {
                                 .requestMatchers("/","/css/**","/images/**", "/js/**",
                                         "/index.html",
                                         "/**",
-                                        "/favicon.ico", "/swagger-ui/**", "/api", "/api/login", "/api/sign-up", "/api/main/**"
-                                , "/ws/**", "/api/feed/**", "")
+                                        "/favicon.ico", "/swagger-ui/**", "/api", "/api/login", "/api/sign-up", "/api/main/**",
+                                        "/ws/**", "/api/feed/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
@@ -97,18 +97,11 @@ public class SecurityConfig {
         corsConfiguration.addExposedHeader("*");
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         corsConfiguration.setAllowedOrigins(List.of(
-                "https://kb38e49779611a.user-app.krampoline.com:3000",
-                "https://kb38e49779611a.user-app.krampoline.com/",
-                "https://kb38e49779611a.user-app.krampoline.com",
-                "https://kb38e49779611a.user-app.krampoline.com:5672",
-                "https://kb38e49779611a.user-app.krampoline.com:15672",
-                "https://kb38e49779611a.user-app.krampoline.com:61613",
-                "https://kb38e49779611a.user-app.krampoline.com:8080",
-                "http://rabbitmq.default.svc.cluster.local:61613",
-                "http://rabbitmq.default.svc.cluster.local:5672",
-                "http://rabbitmq.default.svc.cluster.local:15672",
-                "http://frontend.default.svc.cluster.local:3000",
-                "http://rabbitmq.default.svc.cluster.local:8080"
+                "http://localhost:3000",
+                "http://localhost:5672",
+                "http://localhost:15672",
+                "http://localhost:61613",
+                "http://localhost:8080"
         ));
         corsConfiguration.setAllowCredentials(true);
 
