@@ -1,12 +1,9 @@
 package goojeans.harulog.user.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import goojeans.harulog.config.RabbitMQConfig;
 import goojeans.harulog.domain.BusinessException;
 import goojeans.harulog.domain.ResponseCode;
-import goojeans.harulog.domain.dto.Response;
 import goojeans.harulog.user.domain.dto.CustomOAuth2User;
-import goojeans.harulog.user.domain.dto.response.LoginSuccessResponse;
 import goojeans.harulog.user.domain.entity.Users;
 import goojeans.harulog.user.repository.UserRepository;
 import jakarta.servlet.ServletException;
@@ -22,6 +19,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Component
@@ -32,7 +31,6 @@ public class OAuthLoginSuccessHandler implements AuthenticationSuccessHandler {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
     private final RabbitMQConfig rabbitMQConfig;
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Value("${jwt.cookie.expiration}")
     private Integer COOKIE_EXPIRATION;
@@ -51,18 +49,6 @@ public class OAuthLoginSuccessHandler implements AuthenticationSuccessHandler {
             Authentication authentication1 = jwtTokenProvider.createAuthentication(user);
 
             String accessToken = jwtTokenProvider.generateAccessToken(authentication1);
-            response.addHeader("Authorization", accessToken);
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json");
-
-            LoginSuccessResponse loginSuccessResponse = new LoginSuccessResponse(user.getNickname(), user.getUserRole());
-
-            try {
-                String responseBody = objectMapper.writeValueAsString(Response.ok(loginSuccessResponse));
-                response.getWriter().write(responseBody);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
 
             String refreshToken = jwtTokenProvider.generateRefreshToken();
 
@@ -74,7 +60,11 @@ public class OAuthLoginSuccessHandler implements AuthenticationSuccessHandler {
                     .build();
 
             response.setHeader("Set-Cookie", cookie.toString());
-            response.sendRedirect(DEPLOY_URL);
+
+            String redirectUrl = DEPLOY_URL + "domain/oauth/callback" + "?token=" + accessToken +
+                    "&nickname=" + URLEncoder.encode(user.getNickname(), StandardCharsets.UTF_8) + "&role=" + user.getUserRole();
+
+            response.sendRedirect(redirectUrl);
 
             Users findUser = userRepository.findUsersByEmail(user.getEmail())
                     .orElseThrow(() -> new BusinessException(ResponseCode.USER_NOT_FOUND));
