@@ -97,13 +97,13 @@ public class SecurityConfig {
         corsConfiguration.addExposedHeader("*");
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         corsConfiguration.setAllowedOrigins(List.of(
-                "https://kb38e49779611a.user-app.krampoline.com:3000",
-                "https://kb38e49779611a.user-app.krampoline.com/",
-                "https://kb38e49779611a.user-app.krampoline.com",
-                "https://kb38e49779611a.user-app.krampoline.com:5672",
-                "https://kb38e49779611a.user-app.krampoline.com:15672",
-                "https://kb38e49779611a.user-app.krampoline.com:61613",
-                "https://kb38e49779611a.user-app.krampoline.com:8080",
+                "https://kb4212bd2f12aa.user-app.krampoline.com:3000",
+                "https://kb4212bd2f12aa.user-app.krampoline.com",
+                "https://kb4212bd2f12aa.user-app.krampoline.com/",
+                "https://kb4212bd2f12aa.user-app.krampoline.com:5672",
+                "https://kb4212bd2f12aa.user-app.krampoline.com:15672",
+                "https://kb4212bd2f12aa.user-app.krampoline.com:61613",
+                "https://kb4212bd2f12aa.user-app.krampoline.com:8080",
                 "http://rabbitmq.default.svc.cluster.local:61613",
                 "http://rabbitmq.default.svc.cluster.local:5672",
                 "http://rabbitmq.default.svc.cluster.local:15672",
